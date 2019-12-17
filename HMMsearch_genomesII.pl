@@ -7,7 +7,7 @@ use strict;
 
 #settings:
 my $hmmsearch='/usr/local/bin/hmmsearch'; #the program from HMMER3 package
-my $script_path='/your_path/eCIS-screen'; #location of all eCIS screen scripts
+my $script_path='/Users/feng626/seq2func/bacteriocin/eCIS-screen'; #location of all eCIS screen scripts
 
 my $gbk2IDs=$script_path.'/gbk2IDs.pl';
 my $gbk2seq=$script_path.'/gbk2seq.pl';

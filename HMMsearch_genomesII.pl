@@ -15,7 +15,7 @@ my $hs2tab=$script_path.'/hmmsearch2tab.pl';
 my $filter=$script_path.'/filter_hmmtab.pl';
 my $summary=$script_path.'/parse_hmmtab4eCIS.pl';
 
--x $gbk2IDs and -x $gbk2seq and -x $hmmsearch and -x $hs2tab and -x $filter and -x $summary or die "error run $gbk2seq or $hs2tab or $filter or $hmmsearch";
+#-x $gbk2IDs and -x $gbk2seq and -x $hmmsearch and -x $hs2tab and -x $filter and -x $summary or die "error run $gbk2seq or $hs2tab or $filter or $hmmsearch";
 
 @ARGV==3 or die <<EOF;
 	<-- Pipeline for screening eCIS loci from bacterial genomes -->
@@ -49,7 +49,7 @@ my $output=shift;
 die "error: $output already exists" if -e $output;
 
 my @allout=();
-my @files=glob "$genomepath/*/*_genomic.gbff.gz"; #the file is gzipped by default
+my @files=glob "$genomepath/*/*_genomic.gbff.gz.Z"; #the file is gzipped by default
 my $total_num=@files;
 my $counter=0;
 die "Sorry, no genomes found in '$genomepath'" unless @files;
@@ -63,6 +63,7 @@ foreach my $genome (@files)
 #unzip file first
  my $outgbk="$id.gbk";
  die "Error: $outgbk already exists" if -e $outgbk;
+ # It seems I have to rename the genome file with .Z suffix to make the zcat working
  !system("zcat $genome > $outgbk") or die "unzip file $genome with error";
 #check the completeness of the gbk file
  my $tail=`tail -n 1 $outgbk`;
